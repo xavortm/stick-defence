@@ -10,17 +10,11 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import GameWrapper from './components/GameWrapper/GameWrapper';
-import { useTranslation } from 'react-i18next';
 
 export function App() {
-  const { i18n } = useTranslation();
   return (
     <>
-      <Helmet
-        titleTemplate="Stick Defence"
-        defaultTitle="Stick Defence"
-        htmlAttributes={{ lang: i18n.language }}
-      >
+      <Helmet titleTemplate="Stick Defence" defaultTitle="Stick Defence">
         <meta name="description" content="My first try in making a game" />
       </Helmet>
 
