@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import Waves from '../../gameConfig/waves';
 import { EnemyMan } from '../Spawns/';
 
 interface Atackers {

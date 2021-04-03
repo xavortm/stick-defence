@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { GameContext } from '../../context/store';
 
 const UIWrapper = styled.div`
   position: absolute;
@@ -60,11 +61,13 @@ const UIIngameStatsHeading = styled.h2`
 `;
 
 export default function Dashboard(): JSX.Element {
+  const { state } = useContext(GameContext);
+
   return (
     <UIWrapper>
       <UIIngameBar></UIIngameBar>
       <UIIngameStats>
-        <UIIngameStatsHeading>Day 1</UIIngameStatsHeading>
+        <UIIngameStatsHeading>Day {state.currentWave}</UIIngameStatsHeading>
       </UIIngameStats>
       <UIIngameGuns>
         <strong>Guns:</strong>

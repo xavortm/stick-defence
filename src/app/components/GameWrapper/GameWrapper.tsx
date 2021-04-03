@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { GameProvider } from '../../context/store';
 import Scene from '../Scene/Scene';
 import Dashboard from '../Dashboard/Dashboard';
 
@@ -16,8 +17,10 @@ const Game = styled.div`
 export default function GameWrapper(): JSX.Element {
   return (
     <Game>
-      <Dashboard />
-      <Scene />
+      <GameProvider>
+        <Dashboard />
+        <Scene />
+      </GameProvider>
     </Game>
   );
 }
