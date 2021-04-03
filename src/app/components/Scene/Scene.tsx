@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Attackers from './Attackers';
 import Defenders from './Defenders';
+import Shop from '../Shop/Shop';
 
 const SceneWrapper = styled.section`
   display: flex;
@@ -35,9 +36,12 @@ export default function Scene(): JSX.Element {
       <SceneAttackers>
         <Attackers wave={0} />
       </SceneAttackers>
+
       <SceneDefenders>
         <Defenders />
       </SceneDefenders>
+
+      <Shop />
     </SceneWrapper>
   );
 }

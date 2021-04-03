@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { GameProvider } from '../../context/store';
+import { GameProvider, GameContext } from '../../context/store';
 import Scene from '../Scene/Scene';
 import Dashboard from '../Dashboard/Dashboard';
+import Welcome from '../Welcome/Welcome';
 
 import internalConfig from '../../gameConfig/internalConf';
 
@@ -15,44 +16,15 @@ const Game = styled.div`
 `;
 
 export default function GameWrapper(): JSX.Element {
+  const { state } = useContext(GameContext);
+
   return (
     <Game>
       <GameProvider>
+        {state.isPlaying ? null : <Welcome />}
         <Dashboard />
         <Scene />
       </GameProvider>
     </Game>
   );
 }
-
-/*
-Implement the game state on this level.
-
-The state would include:
-{
-  currentWave: number,
-  isPlaying: boolean,
-  baseHealth: number,
-  wallHealth: number,
-  resources: number, // the money the player earns
-  currentGun: string,
-
-  // Shop system (can be a separate store)
-  shop: {
-    guns: {
-      [
-        type: string,
-        shots: number,
-        reloadTime: number,
-        fireRate: number,
-        damageBoost: number
-      ]
-    },
-    craftsman: number,
-    shooters: number,
-    turrets: number,
-    baseTier: number,
-    wallTier: number
-  }
-}
-*/

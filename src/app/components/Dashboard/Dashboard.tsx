@@ -76,7 +76,9 @@ export default function Dashboard(): JSX.Element {
         <IngameBar label="Health" counterCurrent={1000} counterTotal={1000} />
       </UIIngameBar>
       <UIIngameStats>
-        <UIIngameStatsHeading>Day {state.currentWave}</UIIngameStatsHeading>
+        <UIIngameStatsHeading>
+          Day {state.isPlaying.toString()}
+        </UIIngameStatsHeading>
       </UIIngameStats>
       <UIIngameGuns>
         <strong>Guns:</strong>
