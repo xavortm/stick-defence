@@ -6,6 +6,7 @@ import { gameStateInterface, actionPayloadInterface } from './stateInterface';
 // This holds the value we get on game start
 const initialState: gameStateInterface = {
   currentWave: 0,
+  ammo: 7,
 };
 
 const GameProvider = ({ children }) => {

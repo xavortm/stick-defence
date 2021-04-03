@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import styled from 'styled-components';
+
 import { EnemyManTypes } from './Man';
 import { GameContext } from '../../context/store';
 
@@ -6,6 +8,13 @@ type EnemyProps = {
   /** What type of an enemy should be loaded? */
   type: 'meele' | 'rifle';
 };
+
+const HitBox = styled.button`
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+`;
 
 function EnemyHitbox({ children }) {
   const { state, dispatch } = useContext(GameContext);
@@ -19,7 +28,7 @@ function EnemyHitbox({ children }) {
     console.log('it was clicked', state);
   };
 
-  return <button onClick={onClickHandler}>{children}</button>;
+  return <HitBox onClick={onClickHandler}>{children}</HitBox>;
 }
 
 /**

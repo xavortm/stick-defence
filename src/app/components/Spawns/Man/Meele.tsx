@@ -12,7 +12,7 @@ const meeleConfig: EnemyInterface = {
 };
 
 const EnemyBox = styled.span`
-  display: inline-block;
+  display: block;
   width: ${meeleConfig.boxSizeWidth}em;
   height: ${meeleConfig.boxSizeHeight}em;
 

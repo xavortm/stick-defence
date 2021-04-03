@@ -11,11 +11,17 @@ const AttackingArea = styled.div`
   width: 100%;
 `;
 
+const handleShotFired = () => {
+  console.log('a shot was fired');
+};
+
 export default function Attackers({ wave }: Atackers): JSX.Element {
   return (
-    <AttackingArea>
+    <AttackingArea onClick={handleShotFired}>
       {/* I will have to do the days here as well. */}
       <EnemyMan type="meele" />
     </AttackingArea>
   );
 }
+
+// When clicking on attacking area, a shot has been fired.

@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from '../../context/store';
 
+import IngameBar from './IngameBar';
+
 const UIWrapper = styled.div`
   position: absolute;
 
@@ -11,12 +13,16 @@ const UIWrapper = styled.div`
   height: 100%;
 
   // This changes only when we open the settings or for inner children that can be interactive.
-  pointer-events: none;
+  /* pointer-events: none; */
 `;
 
 const UIIngameBar = styled.div`
   width: 100%;
   height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
 
   // Theming:
   border-bottom: 1px solid #ddd;
@@ -65,7 +71,10 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <UIWrapper>
-      <UIIngameBar></UIIngameBar>
+      <UIIngameBar>
+        <IngameBar label="Bullets" counterCurrent={10} counterTotal={10} />
+        <IngameBar label="Health" counterCurrent={1000} counterTotal={1000} />
+      </UIIngameBar>
       <UIIngameStats>
         <UIIngameStatsHeading>Day {state.currentWave}</UIIngameStatsHeading>
       </UIIngameStats>

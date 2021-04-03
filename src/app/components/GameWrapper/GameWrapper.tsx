@@ -37,7 +37,7 @@ The state would include:
   resources: number, // the money the player earns
   currentGun: string,
 
-  // Shop system
+  // Shop system (can be a separate store)
   shop: {
     guns: {
       [
