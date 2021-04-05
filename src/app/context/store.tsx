@@ -15,6 +15,7 @@ const shopState: GunInterface[] = [
     timeToReload: 1000,
     ammo: 10,
     cost: 0,
+    damage: 50,
   },
 ];
 

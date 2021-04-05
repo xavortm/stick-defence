@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import EnemyInterface from '../EnemyInterface';
 import styled from 'styled-components';
+
+import { GameContext } from '../../../context/store';
 
 // At later point this will could be changed with the different day settings.
 const meeleConfig: EnemyInterface = {
@@ -17,13 +19,15 @@ const EnemyBox = styled.span`
   height: ${meeleConfig.boxSizeHeight}em;
 
   // Later to be updated with a sprite.
-  background: red;
+  background: blue;
 `;
 
-function MeeleEnemy(): JSX.Element {
-  return <EnemyBox></EnemyBox>;
-}
-
 export default function Meele(): JSX.Element {
-  return <MeeleEnemy />;
+  const { state, dispatch } = useContext(GameContext);
+
+  const handleClick = () => {
+    console.log(state.shop);
+  };
+
+  return <EnemyBox onClick={handleClick} />;
 }

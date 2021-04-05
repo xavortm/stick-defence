@@ -3,6 +3,7 @@ export interface GunInterface {
   timeToReload: number;
   ammo: number;
   cost: number;
+  damage: number;
 }
 
 // export interface PistolInterface extends GunInterface {}

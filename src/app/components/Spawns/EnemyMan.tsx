@@ -1,30 +1,11 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 
 import { EnemyManTypes } from './Man';
-import { GameContext } from '../../context/store';
 
 type EnemyProps = {
   /** What type of an enemy should be loaded? */
   type: 'meele' | 'rifle';
 };
-
-const HitBox = styled.button`
-  appearance: none;
-  border: none;
-  background: transparent;
-  padding: 0;
-`;
-
-function EnemyHitbox({ children }) {
-  const { state, dispatch } = useContext(GameContext);
-
-  const onClickHandler = () => {
-    // Reduce health of current enemy
-  };
-
-  return <HitBox onClick={onClickHandler}>{children}</HitBox>;
-}
 
 /**
  * A Generator of enemies of the type "Man".
@@ -44,5 +25,5 @@ export default function EnemyMan({ type }: EnemyProps): JSX.Element {
       break;
   }
 
-  return <EnemyHitbox>{Enemy}</EnemyHitbox>;
+  return <>{Enemy}</>;
 }
