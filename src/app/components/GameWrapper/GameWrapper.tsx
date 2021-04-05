@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import { GameProvider, GameContext } from '../../context/store';
+import { GameProvider } from '../../context/store';
 import Scene from '../Scene/Scene';
 import Dashboard from '../Dashboard/Dashboard';
 import Welcome from '../Welcome/Welcome';
@@ -16,12 +16,11 @@ const Game = styled.div`
 `;
 
 export default function GameWrapper(): JSX.Element {
-  const { state } = useContext(GameContext);
-
   return (
     <Game>
       <GameProvider>
-        {state.isPlaying ? null : <Welcome />}
+        {/* Only visible when the game starts (or on page refresh) */}
+        <Welcome />
         <Dashboard />
         <Scene />
       </GameProvider>

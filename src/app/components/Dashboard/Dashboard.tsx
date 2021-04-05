@@ -13,7 +13,7 @@ const UIWrapper = styled.div`
   height: 100%;
 
   // This changes only when we open the settings or for inner children that can be interactive.
-  /* pointer-events: none; */
+  pointer-events: none;
 `;
 
 const UIIngameBar = styled.div`
@@ -77,7 +77,7 @@ export default function Dashboard(): JSX.Element {
       </UIIngameBar>
       <UIIngameStats>
         <UIIngameStatsHeading>
-          Day {state.isPlaying.toString()}
+          Day {state.gameplay.currentWave}
         </UIIngameStatsHeading>
       </UIIngameStats>
       <UIIngameGuns>

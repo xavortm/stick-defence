@@ -1,9 +1,30 @@
-import { gameStateInterface, actionPayloadInterface } from './stateInterface';
+import { GunInterface } from '../components/Shop/GunInterface';
 
-const Reducer = (
-  state: gameStateInterface,
+export interface shopStateInterface {
+  guns: GunInterface[];
+}
+
+export interface gameplayInterface {
+  currentWave: number;
+  ammo: number;
+  isPlaying: boolean;
+}
+
+export interface gameStateInterface {
+  gameplay: gameplayInterface;
+  shop: {
+    guns: GunInterface[];
+  };
+}
+
+export interface actionPayloadInterface {
+  type: String;
+}
+
+export const Reducer = (
+  state: gameplayInterface,
   action: actionPayloadInterface,
-): gameStateInterface => {
+): gameplayInterface => {
   switch (action.type) {
     case 'NEW_WAVE':
       return { ...state, currentWave: state.currentWave + 1 };
@@ -16,4 +37,14 @@ const Reducer = (
   }
 };
 
-export default Reducer;
+export const Shop = (
+  state: shopStateInterface,
+  action: actionPayloadInterface,
+): shopStateInterface => {
+  switch (action.type) {
+    case 'SELECT':
+      return { ...state };
+    default:
+      return state;
+  }
+};

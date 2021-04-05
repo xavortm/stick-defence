@@ -2,7 +2,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from '../../context/store';
 
-const WelcomeWrapper = styled.div`
+interface WelcomeWrapperInterface {
+  visible: boolean;
+}
+
+const WelcomeWrapper = styled.div<WelcomeWrapperInterface>`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -11,7 +15,7 @@ const WelcomeWrapper = styled.div`
   z-index: 10;
   text-align: center;
   color: white;
-  display: flex;
+  display: ${props => (props.visible ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;
 
@@ -42,12 +46,11 @@ export default function Welcome() {
   const { state, dispatch } = useContext(GameContext);
 
   const handleGameStart = () => {
-    dispatch({ type: 'NEW_WAVE' });
-    console.log(state);
+    dispatch({ type: 'START_GAME' });
   };
 
   return (
-    <WelcomeWrapper>
+    <WelcomeWrapper visible={!state.gameplay.isPlaying}>
       <WelcomeTitle>Stick Defence</WelcomeTitle>
       <p>
         v0.0.1 | Developed by Alex Dimitrov{' '}

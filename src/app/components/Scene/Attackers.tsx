@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { EnemyMan } from '../Spawns/';
+import { GameContext } from '../../context/store';
 
 interface Atackers {
   wave: number;
@@ -11,11 +12,13 @@ const AttackingArea = styled.div`
   width: 100%;
 `;
 
-const handleShotFired = () => {
-  console.log('a shot was fired');
-};
-
 export default function Attackers({ wave }: Atackers): JSX.Element {
+  const { dispatch } = useContext(GameContext);
+
+  const handleShotFired = () => {
+    dispatch({ type: 'SHOT_FIRED' });
+  };
+
   return (
     <AttackingArea onClick={handleShotFired}>
       {/* I will have to do the days here as well. */}
