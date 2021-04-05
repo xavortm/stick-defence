@@ -5,6 +5,7 @@ interface ComponentInterface {
   label: string;
   counterTotal: number;
   counterCurrent: number;
+  isReloading?: boolean;
 }
 
 interface BarProps {
@@ -29,10 +30,15 @@ const Bar = styled.div<BarProps>`
   background: black;
 `;
 
-const CounterWrapper = styled.div`
+interface IngameBarInterface {
+  isReloading: boolean | undefined;
+}
+
+const CounterWrapper = styled.div<IngameBarInterface>`
   display: flex;
   width: 100%;
   align-items: center;
+  opacity: ${props => (props.isReloading === true ? 0.3 : 1)};
 
   &:first-child {
     margin-right: 1em;
@@ -48,9 +54,10 @@ export default function IngameBar({
   label,
   counterTotal,
   counterCurrent,
+  isReloading,
 }: ComponentInterface) {
   return (
-    <CounterWrapper>
+    <CounterWrapper isReloading={isReloading}>
       <CounterLabel>{label}</CounterLabel>
       <BarWrapper>
         <Bar current={counterCurrent} total={counterTotal} />

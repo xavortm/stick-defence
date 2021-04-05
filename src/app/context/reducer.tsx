@@ -8,6 +8,8 @@ export interface gameplayInterface {
   currentWave: number;
   ammo: number;
   isPlaying: boolean;
+  bullets: number;
+  isReloading: boolean;
 }
 
 export interface gameStateInterface {
@@ -32,6 +34,12 @@ export const Reducer = (
       return { ...state, isPlaying: true };
     case 'END_GAME':
       return { ...state, isPlaying: false };
+    case 'RELOADING':
+      return { ...state, isReloading: true };
+    case 'RELOADED':
+      return { ...state, isReloading: false };
+    case 'SHOT_FIRED':
+      return { ...state, bullets: shoot(state.bullets, state.ammo) };
     default:
       return state;
   }
@@ -47,4 +55,15 @@ export const Shop = (
     default:
       return state;
   }
+};
+
+/**
+ * Shoot a bullet. Calculates if we should reload or not.
+ *
+ * @param current Number
+ * @param total Number
+ * @returns Number
+ */
+const shoot = (current: number, total: number): number => {
+  return current === 1 ? total : current - 1;
 };

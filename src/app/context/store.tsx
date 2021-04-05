@@ -24,6 +24,8 @@ const initialState: gameStateInterface = {
     currentWave: 0,
     ammo: 7,
     isPlaying: false,
+    bullets: 7,
+    isReloading: false,
   },
   shop: {
     guns: shopState,

@@ -20,12 +20,7 @@ function EnemyHitbox({ children }) {
   const { state, dispatch } = useContext(GameContext);
 
   const onClickHandler = () => {
-    // Increase the current wave.
-    dispatch({
-      type: 'NEW_WAVE',
-    });
-
-    console.log('it was clicked', state);
+    // Reduce health of current enemy
   };
 
   return <HitBox onClick={onClickHandler}>{children}</HitBox>;

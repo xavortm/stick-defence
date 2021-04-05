@@ -72,14 +72,22 @@ export default function Dashboard(): JSX.Element {
   return (
     <UIWrapper>
       <UIIngameBar>
-        <IngameBar label="Bullets" counterCurrent={10} counterTotal={10} />
+        <IngameBar
+          label="Bullets"
+          counterCurrent={state.gameplay.bullets}
+          counterTotal={state.gameplay.ammo}
+          isReloading={state.gameplay.isReloading}
+        />
+
         <IngameBar label="Health" counterCurrent={1000} counterTotal={1000} />
       </UIIngameBar>
+
       <UIIngameStats>
         <UIIngameStatsHeading>
           Day {state.gameplay.currentWave}
         </UIIngameStatsHeading>
       </UIIngameStats>
+
       <UIIngameGuns>
         <strong>Guns:</strong>
         <UIGun>Pistol</UIGun>
