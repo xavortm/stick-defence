@@ -18,6 +18,7 @@ interface EnemyBoxInterface {
   isDead: boolean;
   moveArea: number;
   time: number;
+  top: number;
 }
 
 const moveHorizintal = x => keyframes`
@@ -31,11 +32,13 @@ const moveHorizintal = x => keyframes`
 
 const EnemyBox = styled.span<EnemyBoxInterface>`
   display: block;
+  position: absolute;
   width: ${meeleConfig.boxSizeWidth}em;
   height: ${meeleConfig.boxSizeHeight}em;
 
   // Later to be updated with a sprite.
   background: ${props => (props.isDead ? 'red' : 'blue')};
+  top: ${props => props.top}px;
 
   animation: ${props => moveHorizintal(props.moveArea)} ${props => props.time}s
     linear;
@@ -43,7 +46,7 @@ const EnemyBox = styled.span<EnemyBoxInterface>`
   animation-play-state: ${props => (props.isDead ? 'paused' : 'playing')};
 `;
 
-export default function Meele({ moveArea, time }): JSX.Element {
+export default function Meele({ moveArea, time, top }): JSX.Element {
   const { state, dispatch } = useContext(GameContext);
   const [health, setHealth] = useState(meeleConfig.health);
   const [armor, setArmor] = useState(meeleConfig.armor);
@@ -68,6 +71,7 @@ export default function Meele({ moveArea, time }): JSX.Element {
     <EnemyBox
       time={time}
       moveArea={moveArea}
+      top={top}
       isDead={dead}
       onClick={handleClick}
     />

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { EnemyMan } from '../Spawns/';
+import Spawner from './Spawner';
 import { GameContext } from '../../context/store';
 
 interface Atackers {
@@ -15,6 +16,7 @@ const AttackingArea = styled.div<AttackingStylesInterface>`
   height: 18em;
   width: 100%;
   pointer-events: ${props => (props.canAttack ? 'all' : 'none')};
+  position: relative;
 `;
 
 export default function Attackers({ wave }: Atackers): JSX.Element {
@@ -66,7 +68,7 @@ export default function Attackers({ wave }: Atackers): JSX.Element {
       onClick={handleShotFired}
     >
       {/* I will have to do the days here as well. */}
-      <EnemyMan moveArea={543} type="meele" />
+      <Spawner moveArea={543} />
     </AttackingArea>
   );
 }

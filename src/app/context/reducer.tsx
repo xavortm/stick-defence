@@ -32,7 +32,7 @@ export const Reducer = (
     case 'NEW_WAVE':
       return { ...state, currentWave: state.currentWave + 1 };
     case 'START_GAME':
-      return { ...state, isPlaying: true };
+      return { ...state, isPlaying: true, currentWave: 0 };
     case 'END_GAME':
       return { ...state, isPlaying: false };
     case 'RELOADING':

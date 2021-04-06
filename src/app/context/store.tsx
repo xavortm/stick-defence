@@ -22,7 +22,7 @@ const shopState: GunInterface[] = [
 // This holds the value we get on game start
 const initialState: gameStateInterface = {
   gameplay: {
-    currentWave: 0,
+    currentWave: -1,
     currentGun: 'Pistol',
     ammo: 7,
     bullets: 7,
