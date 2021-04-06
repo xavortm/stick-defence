@@ -27,28 +27,27 @@ export default function Spawner({ moveArea }: SpawnerInterface) {
       if (
         Waves[state.gameplay.currentWave].enemies.meele! < enemiesSent.current
       ) {
-        clearInterval(timer.current || 0);
+        clearInterval(timer.current);
         enemiesSent.current = 0;
-        console.log("why doesn't it clear the interval?!?!??!");
+      } else {
+        timer.current = setInterval(() => {
+          enemiesSent.current++;
+
+          setEnemiesList(old => [
+            ...old,
+            <EnemyMan
+              // Math.random() * (200 - 1) + 1
+              top={randomNumbers[enemiesSent.current]}
+              type="meele"
+              moveArea={moveArea}
+            />,
+          ]);
+        }, 200);
       }
-
-      timer.current = setInterval(() => {
-        enemiesSent.current++;
-
-        setEnemiesList(old => [
-          ...old,
-          <EnemyMan
-            // Math.random() * (200 - 1) + 1
-            top={randomNumbers[enemiesSent.current]}
-            type="meele"
-            moveArea={moveArea}
-          />,
-        ]);
-      }, 200);
     }
 
     return () => {
-      clearInterval(timer.current || 0);
+      clearInterval(timer.current);
     };
   }, [
     state.gameplay.isPlaying,
