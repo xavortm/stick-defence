@@ -26,6 +26,8 @@ export default function Attackers({ wave }: Atackers): JSX.Element {
   // Needed to maintain the class state inside setTimeout
   const canAttack = useRef(true);
 
+  const attackingAreaRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
   useEffect(() => {
     let reloading: number;
     const reloadingTime = 500; // Later to be updated from state
@@ -54,10 +56,17 @@ export default function Attackers({ wave }: Atackers): JSX.Element {
     }
   };
 
+  // Later update to working output from:
+  // attackingAreaRef.current.offsetWidth
+
   return (
-    <AttackingArea canAttack={canAttack.current} onClick={handleShotFired}>
+    <AttackingArea
+      ref={attackingAreaRef}
+      canAttack={canAttack.current}
+      onClick={handleShotFired}
+    >
       {/* I will have to do the days here as well. */}
-      <EnemyMan type="meele" />
+      <EnemyMan moveArea={543} type="meele" />
     </AttackingArea>
   );
 }

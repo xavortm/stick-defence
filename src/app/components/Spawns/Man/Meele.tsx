@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import EnemyInterface from '../EnemyInterface';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import { GameContext } from '../../../context/store';
 import { GunInterface } from '../../Shop/GunInterface';
@@ -16,7 +16,18 @@ const meeleConfig: EnemyInterface = {
 
 interface EnemyBoxInterface {
   isDead: boolean;
+  moveArea: number;
+  time: number;
 }
+
+const moveHorizintal = x => keyframes`
+    0% {
+        transform : translateX(0px) 
+    }
+    100% {
+        transform : translateX(${x}px)
+    }
+`;
 
 const EnemyBox = styled.span<EnemyBoxInterface>`
   display: block;
@@ -25,9 +36,14 @@ const EnemyBox = styled.span<EnemyBoxInterface>`
 
   // Later to be updated with a sprite.
   background: ${props => (props.isDead ? 'red' : 'blue')};
+
+  animation: ${props => moveHorizintal(props.moveArea)} ${props => props.time}s
+    linear;
+  animation-fill-mode: both;
+  animation-play-state: ${props => (props.isDead ? 'paused' : 'playing')};
 `;
 
-export default function Meele(): JSX.Element {
+export default function Meele({ moveArea, time }): JSX.Element {
   const { state, dispatch } = useContext(GameContext);
   const [health, setHealth] = useState(meeleConfig.health);
   const [armor, setArmor] = useState(meeleConfig.armor);
@@ -48,5 +64,12 @@ export default function Meele(): JSX.Element {
     setHealth(health => health - damage);
   };
 
-  return <EnemyBox isDead={dead} onClick={handleClick} />;
+  return (
+    <EnemyBox
+      time={time}
+      moveArea={moveArea}
+      isDead={dead}
+      onClick={handleClick}
+    />
+  );
 }
