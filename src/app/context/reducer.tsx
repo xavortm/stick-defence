@@ -4,19 +4,20 @@ export interface shopStateInterface {
   guns: GunInterface[];
 }
 
-export interface gameplayInterface {
-  currentWave: number;
-  ammo: number;
-  isPlaying: boolean;
-  bullets: number;
-  isReloading: boolean;
-}
-
 export interface gameStateInterface {
   gameplay: gameplayInterface;
   shop: {
     guns: GunInterface[];
   };
+}
+
+export interface gameplayInterface {
+  currentWave: number;
+  currentGun: string;
+  ammo: number;
+  isPlaying: boolean;
+  bullets: number;
+  isReloading: boolean;
 }
 
 export interface actionPayloadInterface {

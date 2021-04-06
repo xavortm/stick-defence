@@ -23,9 +23,10 @@ const shopState: GunInterface[] = [
 const initialState: gameStateInterface = {
   gameplay: {
     currentWave: 0,
+    currentGun: 'Pistol',
     ammo: 7,
-    isPlaying: false,
     bullets: 7,
+    isPlaying: false,
     isReloading: false,
   },
   shop: {
