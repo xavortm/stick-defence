@@ -18,10 +18,12 @@ export interface gameplayInterface {
   isPlaying: boolean;
   bullets: number;
   isReloading: boolean;
+  money: number;
 }
 
 export interface actionPayloadInterface {
-  type: String;
+  type: string;
+  payload?: any;
 }
 
 export const Reducer = (
@@ -41,6 +43,8 @@ export const Reducer = (
       return { ...state, isReloading: false };
     case 'SHOT_FIRED':
       return { ...state, bullets: shoot(state.bullets, state.ammo) };
+    case 'ADD_MONEY':
+      return { ...state, money: state.money + action.payload };
     default:
       return state;
   }

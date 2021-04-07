@@ -38,6 +38,10 @@ const UIIngameStats = styled.div`
   // Theming:
   border: 1px solid #ddd;
   background: white;
+
+  p {
+    margin: 0;
+  }
 `;
 
 const UIIngameGuns = styled.div`
@@ -84,8 +88,9 @@ export default function Dashboard(): JSX.Element {
 
       <UIIngameStats>
         <UIIngameStatsHeading>
-          Day {state.gameplay.currentWave}
+          <p>Day {state.gameplay.currentWave}</p>
         </UIIngameStatsHeading>
+        <p>Money {state.gameplay.money}</p>
       </UIIngameStats>
 
       <UIIngameGuns>

@@ -25,4 +25,9 @@ export default interface EnemyInterface {
    * Armor is used to caluclate more complex damage reductions.
    */
   armor: number;
+
+  /**
+   * The amount of money the player earns when an enemy is killed.
+   */
+  bounty: number;
 }

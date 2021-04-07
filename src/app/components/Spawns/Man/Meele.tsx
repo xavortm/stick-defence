@@ -11,6 +11,7 @@ const meeleConfig: EnemyInterface = {
   boxSizeWidth: 2,
   boxSizeHeight: 2,
   health: 100,
+  bounty: 20,
   armor: 0, // This will be used at a later point.
 };
 
@@ -38,6 +39,7 @@ const EnemyBox = styled.span<EnemyBoxInterface>`
 
   // Later to be updated with a sprite.
   background: ${props => (props.isDead ? 'red' : 'blue')};
+  pointer-events: ${props => (props.isDead ? 'none' : 'all')};
   top: ${props => props.top}px;
 
   animation: ${props => moveHorizintal(props.moveArea)} ${props => props.time}s
@@ -62,6 +64,12 @@ export default function Meele({ moveArea, time, top }): JSX.Element {
     // The check here will have to account for armor as well.
     if (health - damage <= 0) {
       setDead(true);
+
+      // Increment money to global state here:
+      dispatch({
+        type: 'ADD_MONEY',
+        payload: meeleConfig.bounty,
+      });
     }
 
     setHealth(health => health - damage);

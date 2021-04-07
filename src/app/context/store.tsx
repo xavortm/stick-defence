@@ -28,6 +28,7 @@ const initialState: gameStateInterface = {
     bullets: 7,
     isPlaying: false,
     isReloading: false,
+    money: 0,
   },
   shop: {
     guns: shopState,

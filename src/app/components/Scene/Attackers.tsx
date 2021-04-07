@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { EnemyMan } from '../Spawns/';
 import Spawner from './Spawner';
 import { GameContext } from '../../context/store';
 

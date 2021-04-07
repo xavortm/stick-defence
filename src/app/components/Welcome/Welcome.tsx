@@ -11,7 +11,7 @@ const WelcomeWrapper = styled.div<WelcomeWrapperInterface>`
   width: 100%;
   height: 100%;
   background: black;
-  opacity: 0.5;
+  /* opacity: 0.5; */
   z-index: 10;
   text-align: center;
   color: white;
