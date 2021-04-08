@@ -12,8 +12,8 @@ import { GunInterface } from '../components/Shop/GunInterface';
 const shopState: GunInterface[] = [
   {
     type: 'Pistol',
-    timeToReload: 1000,
-    ammo: 10,
+    timeToReload: 2000,
+    ammo: 7,
     cost: 0,
     damage: 50,
   },
@@ -24,11 +24,16 @@ const initialState: gameStateInterface = {
   gameplay: {
     currentWave: -1,
     currentGun: 'Pistol',
-    ammo: 7,
+
+    // To be removed and use from Shop
     bullets: 7,
+    ammo: 7,
+
     isPlaying: false,
     isReloading: false,
     money: 0,
+    enemiesKilled: 0,
+    enemiesKilledTotal: 0,
   },
   shop: {
     guns: shopState,

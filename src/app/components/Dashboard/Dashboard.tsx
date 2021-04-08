@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from '../../context/store';
+import { useCurrentGun } from '../../hooks/useCurrent';
 
 import IngameBar from './IngameBar';
 
@@ -72,6 +73,7 @@ const UIIngameStatsHeading = styled.h2`
 
 export default function Dashboard(): JSX.Element {
   const { state } = useContext(GameContext);
+  const currentGun = useCurrentGun();
 
   return (
     <UIWrapper>
@@ -79,7 +81,7 @@ export default function Dashboard(): JSX.Element {
         <IngameBar
           label="Bullets"
           counterCurrent={state.gameplay.bullets}
-          counterTotal={state.gameplay.ammo}
+          counterTotal={currentGun.ammo}
           isReloading={state.gameplay.isReloading}
         />
 

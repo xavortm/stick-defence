@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+
 import Spawner from './Spawner';
 import { GameContext } from '../../context/store';
+import { useCurrentGun } from '../../hooks/useCurrent';
 
 interface Atackers {
   wave: number;
@@ -24,6 +26,9 @@ export default function Attackers({ wave }: Atackers): JSX.Element {
   // Needed to update the state of the component when reloading happens.
   const [isReloading, setIsReloading] = useState(false);
 
+  // Custom hook that returns data from useCurrentGun
+  const currentGun = useCurrentGun();
+
   // Needed to maintain the class state inside setTimeout
   const canAttack = useRef(true);
 
@@ -31,20 +36,19 @@ export default function Attackers({ wave }: Atackers): JSX.Element {
 
   useEffect(() => {
     let reloading: number;
-    const reloadingTime = 500; // Later to be updated from state
 
     if (isReloading) {
       reloading = setTimeout(() => {
         canAttack.current = true;
         setIsReloading(false);
         dispatch({ type: 'RELOADED' });
-      }, reloadingTime);
+      }, currentGun.timeToReload);
     }
 
     return () => {
       clearTimeout(reloading);
     };
-  }, [state.gameplay.bullets, isReloading, dispatch]);
+  }, [state.gameplay.bullets, isReloading, dispatch, currentGun.timeToReload]);
 
   const handleShotFired = () => {
     dispatch({ type: 'SHOT_FIRED' });

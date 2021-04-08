@@ -10,7 +10,7 @@ interface SpawnerInterface {
 
 export default function Spawner({ moveArea }: SpawnerInterface) {
   const { state } = useContext(GameContext);
-  const enemiesSent = useRef(0);
+  const [enemiesSent, setEnemiesSent] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval>>();
   const [enemiesList, setEnemiesList] = useState<JSX.Element[]>([]);
 
@@ -22,28 +22,26 @@ export default function Spawner({ moveArea }: SpawnerInterface) {
   // @TODO: Refactor at some point by cleaning up if statements and code structure.
   useEffect(() => {
     if (state.gameplay.isPlaying) {
-      if (
-        Waves[state.gameplay.currentWave].enemies.meele! <= enemiesSent.current
-      ) {
+      if (Waves[state.gameplay.currentWave].enemies.meele! <= enemiesSent) {
         clearInterval(timer.current);
       } else {
         timer.current = setInterval(() => {
-          enemiesSent.current++;
+          setEnemiesSent(enemiesSent + 1);
 
           setEnemiesList(old => [
             ...old,
             <EnemyMan
               // Key is irrelevant really as we are not doing anything with it :3
-              key={randomNumbers[enemiesSent.current]}
-              top={randomNumbers[enemiesSent.current]}
+              key={randomNumbers[enemiesSent]}
+              top={randomNumbers[enemiesSent]}
               type="meele"
               moveArea={moveArea}
             />,
           ]);
-        }, randomNumbers[enemiesSent.current] * 15);
+        }, randomNumbers[enemiesSent] * 15);
       }
     } else {
-      enemiesSent.current = 0;
+      setEnemiesSent(0);
     }
 
     return () => {
@@ -54,6 +52,7 @@ export default function Spawner({ moveArea }: SpawnerInterface) {
     state.gameplay.currentWave,
     randomNumbers,
     moveArea,
+    enemiesSent,
   ]);
 
   return <>{enemiesList}</>;
