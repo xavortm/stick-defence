@@ -11,38 +11,45 @@ interface SpawnerInterface {
 export default function Spawner({ moveArea }: SpawnerInterface) {
   const { state } = useContext(GameContext);
   const [enemiesSent, setEnemiesSent] = useState(0);
-  const timer = useRef<ReturnType<typeof setInterval>>();
   const [enemiesList, setEnemiesList] = useState<JSX.Element[]>([]);
+  const timer = useRef<ReturnType<typeof setInterval>>();
 
   // Random numbers are needed to set the TOP value.
   const randomNumbers = Array.from({ length: 200 }, () =>
     Math.floor(Math.random() * 200),
   );
 
-  // @TODO: Refactor at some point by cleaning up if statements and code structure.
   useEffect(() => {
-    if (state.gameplay.isPlaying) {
-      if (Waves[state.gameplay.currentWave].enemies.meele! <= enemiesSent) {
-        clearInterval(timer.current);
-      } else {
-        timer.current = setInterval(() => {
-          setEnemiesSent(enemiesSent + 1);
-
-          setEnemiesList(old => [
-            ...old,
-            <EnemyMan
-              // Key is irrelevant really as we are not doing anything with it :3
-              key={randomNumbers[enemiesSent]}
-              top={randomNumbers[enemiesSent]}
-              type="meele"
-              moveArea={moveArea}
-            />,
-          ]);
-        }, randomNumbers[enemiesSent] * 15);
-      }
-    } else {
+    // For all the times this component renders but there is no game going on, just
+    // skip the meat of it ^^
+    if (!state.gameplay.isPlaying) {
       setEnemiesSent(0);
+      return undefined;
     }
+
+    // This is the moment when we've sent all the enemies from Meele. Stop doing stuff.
+    // @TODO: Later this will be reworked to work with all types.
+    if (Waves[state.gameplay.currentWave].enemies.meele! <= enemiesSent) {
+      clearInterval(timer.current);
+      return undefined;
+    }
+
+    timer.current = setInterval(() => {
+      setEnemiesSent(enemiesSent + 1);
+
+      setEnemiesList(old => [
+        ...old,
+        <EnemyMan
+          // Key is irrelevant really as we are not doing anything with it :3
+          key={enemiesSent}
+          // Random top value is needed to make the game interesting visually.
+          top={randomNumbers[enemiesSent]}
+          // @TODO: Change to pull all current wave enemies
+          type="meele"
+          moveArea={moveArea}
+        />,
+      ]);
+    }, randomNumbers[enemiesSent] * 15);
 
     return () => {
       clearInterval(timer.current);

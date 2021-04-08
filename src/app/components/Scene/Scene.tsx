@@ -32,9 +32,7 @@ const SceneDefenders = styled.div`
 `;
 
 export default function Scene(): JSX.Element {
-  const { state } = useContext(GameContext);
-
-  console.log(state);
+  // const { state } = useContext(GameContext);
 
   return (
     <SceneWrapper>
