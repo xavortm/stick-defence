@@ -1,5 +1,4 @@
 interface WaveInterface {
-  time: number;
   enemies: {
     meele?: number;
     rifle?: number;
@@ -10,7 +9,6 @@ interface WaveInterface {
 // and all later waves change the previous one.
 const Waves: WaveInterface[] = [
   {
-    time: 30000,
     enemies: {
       meele: 2,
     },
