@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { GameContext } from '../context/store';
 import { GunInterface } from '../components/Shop/GunInterface';
 
+import Waves from '../gameConfig/waves';
+
 /**
  * Uses current gun
  * @returns  Object with the current gun structure and data from the store
@@ -25,4 +27,21 @@ export function useCurrentGun(): GunInterface {
         cost: 99999,
         damage: 99999,
       };
+}
+
+export function useCurrentWaveTotalEnemies() {
+  const { state } = useContext(GameContext);
+  let totalEnemies = 0;
+
+  if (typeof Waves[state.gameplay.currentWave] === 'undefined') {
+    return;
+  }
+
+  for (const [key, value] of Object.entries(
+    Waves[state.gameplay.currentWave].enemies,
+  )) {
+    if (typeof value === 'number') totalEnemies += value;
+  }
+
+  return totalEnemies;
 }

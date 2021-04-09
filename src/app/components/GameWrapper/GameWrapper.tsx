@@ -5,6 +5,7 @@ import { GameProvider, GameContext } from '../../context/store';
 import Scene from '../Scene/Scene';
 import Dashboard from '../Dashboard/Dashboard';
 import Welcome from '../Welcome/Welcome';
+import Completed from '../Completed/Completed';
 
 import internalConfig from '../../gameConfig/internalConf';
 
@@ -24,6 +25,9 @@ export default function GameWrapper(): JSX.Element {
 
         <Dashboard />
         <Scene />
+
+        {/* When the end game is reached, open the screen below. */}
+        <Completed />
       </GameProvider>
     </Game>
   );

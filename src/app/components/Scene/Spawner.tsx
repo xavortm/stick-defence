@@ -2,16 +2,19 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { EnemyMan } from '../Spawns/';
 import { GameContext } from '../../context/store';
 import { EnemyManTypes } from '../Spawns/Man';
+import { useCurrentWaveTotalEnemies } from '../../hooks/useCurrent';
 import Waves from '../../gameConfig/waves';
 
 interface SpawnerInterface {
   moveArea: number;
 }
 
+// The Spawner mostly is side effect stuff that manages the game state.
 export default function Spawner({ moveArea }: SpawnerInterface) {
-  const { state } = useContext(GameContext);
+  const { state, dispatch } = useContext(GameContext);
   const [enemiesSent, setEnemiesSent] = useState(0);
   const [enemiesList, setEnemiesList] = useState<JSX.Element[]>([]);
+  const currentWaveEnemies = useCurrentWaveTotalEnemies();
   const timer = useRef<ReturnType<typeof setInterval>>();
 
   // Random numbers are needed to set the TOP value.
@@ -19,19 +22,37 @@ export default function Spawner({ moveArea }: SpawnerInterface) {
     Math.floor(Math.random() * 200),
   );
 
+  // With this we know that the end has waved and the player cleared it.
+  useEffect(() => {
+    if (currentWaveEnemies === state.gameplay.enemiesKilled) {
+      dispatch({ type: 'END_WAVE' });
+      setEnemiesList([]);
+
+      // Once the wave ends, check if the we've reached the final level.
+      if (Waves.length === state.gameplay.currentWave + 1) {
+        dispatch({ type: 'END_GAME' });
+      }
+    }
+  }, [
+    dispatch,
+    currentWaveEnemies,
+    state.gameplay.enemiesKilled,
+    state.gameplay.currentWave,
+  ]);
+
   useEffect(() => {
     // For all the times this component renders but there is no game going on, just
     // skip the meat of it ^^
     if (!state.gameplay.isPlaying) {
       setEnemiesSent(0);
-      return undefined;
+      return;
     }
 
     // This is the moment when we've sent all the enemies from Meele. Stop doing stuff.
     // @TODO: Later this will be reworked to work with all types.
     if (Waves[state.gameplay.currentWave].enemies.meele! <= enemiesSent) {
       clearInterval(timer.current);
-      return undefined;
+      return;
     }
 
     timer.current = setInterval(() => {
@@ -49,6 +70,8 @@ export default function Spawner({ moveArea }: SpawnerInterface) {
           moveArea={moveArea}
         />,
       ]);
+
+      // As currentWave increases, the value below (15) must decrease.
     }, randomNumbers[enemiesSent] * 15);
 
     return () => {

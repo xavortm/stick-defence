@@ -1,5 +1,4 @@
 import { GunInterface } from '../components/Shop/GunInterface';
-import { useCurrentGun } from '../hooks/useCurrent';
 
 export interface shopStateInterface {
   guns: GunInterface[];
@@ -15,11 +14,13 @@ export interface gameStateInterface {
 export interface gameplayInterface {
   currentWave: number;
   currentGun: string;
+  ammo: number;
+  bullets: number;
 
   isPlaying: boolean;
-  bullets: number;
-  ammo: number;
+  isWaveEnded: boolean;
   isReloading: boolean;
+  isGameCompleted: boolean;
   money: number;
   enemiesKilled: number;
   enemiesKilledTotal: number;
@@ -35,15 +36,14 @@ export const Reducer = (
   action: actionPayloadInterface,
 ): gameplayInterface => {
   switch (action.type) {
-    case 'NEW_WAVE':
+    case 'START_WAVE':
       return {
         ...state,
         currentWave: state.currentWave + 1,
         enemiesKilled: 0,
+        isPlaying: true,
       };
-    case 'START_GAME':
-      return { ...state, isPlaying: true, currentWave: 0 };
-    case 'END_GAME':
+    case 'END_WAVE':
       return { ...state, isPlaying: false };
     case 'RELOADING':
       return { ...state, isReloading: true };
@@ -53,6 +53,8 @@ export const Reducer = (
       return { ...state, bullets: shoot(state.bullets, state.ammo) };
     case 'ADD_MONEY':
       return { ...state, money: state.money + action.payload };
+    case 'END_GAME':
+      return { ...state, isGameCompleted: true, isPlaying: false };
     case 'KILL_ENEMEY':
       return {
         ...state,

@@ -3,7 +3,10 @@ import styled from 'styled-components';
 
 import Spawner from './Spawner';
 import { GameContext } from '../../context/store';
-import { useCurrentGun } from '../../hooks/useCurrent';
+import {
+  useCurrentGun,
+  useCurrentWaveTotalEnemies,
+} from '../../hooks/useCurrent';
 
 interface Atackers {
   wave: number;
@@ -34,6 +37,7 @@ export default function Attackers({ wave }: Atackers): JSX.Element {
 
   const attackingAreaRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
+  //useEffect to manage the reloading of the gun.
   useEffect(() => {
     let reloading: number;
 

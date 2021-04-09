@@ -31,6 +31,9 @@ const initialState: gameStateInterface = {
 
     isPlaying: false,
     isReloading: false,
+    isWaveEnded: true,
+    isGameCompleted: false,
+
     money: 0,
     enemiesKilled: 0,
     enemiesKilledTotal: 0,

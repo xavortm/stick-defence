@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import { GameContext } from '../../context/store';
 import Attackers from './Attackers';
 import Defenders from './Defenders';
 import Shop from '../Shop/Shop';

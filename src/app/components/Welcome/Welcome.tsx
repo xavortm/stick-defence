@@ -46,11 +46,13 @@ export default function Welcome() {
   const { state, dispatch } = useContext(GameContext);
 
   const handleGameStart = () => {
-    dispatch({ type: 'START_GAME' });
+    dispatch({ type: 'START_WAVE' });
   };
 
   return (
-    <WelcomeWrapper visible={!state.gameplay.isPlaying}>
+    <WelcomeWrapper
+      visible={!state.gameplay.isPlaying && state.gameplay.currentWave === -1}
+    >
       <WelcomeTitle>Stick Defence</WelcomeTitle>
       <p>
         v0.0.1 | Developed by Alex Dimitrov{' '}

@@ -12,7 +12,7 @@ const Waves: WaveInterface[] = [
   {
     time: 30000,
     enemies: {
-      meele: 10,
+      meele: 2,
     },
   },
 ];
