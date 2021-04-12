@@ -8,10 +8,6 @@ import {
   useCurrentWaveTotalEnemies,
 } from '../../hooks/useCurrent';
 
-interface Atackers {
-  wave: number;
-}
-
 interface AttackingStylesInterface {
   canAttack: boolean;
 }
@@ -23,7 +19,16 @@ const AttackingArea = styled.div<AttackingStylesInterface>`
   position: relative;
 `;
 
-export default function Attackers({ wave }: Atackers): JSX.Element {
+/**
+ * The Attackers component handles just the shooting mechanics - shots fired and reloading.
+ *
+ * Inside the attackers component we are rendering the <Spawner /> component which handles
+ * all the enemies being shown on the screen. Each enemy on it's own handles it's state
+ * (live/dead, moving/shooting and so on).
+ *
+ * @returns JSX.Elements <Spawner /> component
+ */
+export default function Attackers(): JSX.Element {
   const { state, dispatch } = useContext(GameContext);
 
   // Needed to update the state of the component when reloading happens.
@@ -79,5 +84,3 @@ export default function Attackers({ wave }: Atackers): JSX.Element {
     </AttackingArea>
   );
 }
-
-// When clicking on attacking area, a shot has been fired.

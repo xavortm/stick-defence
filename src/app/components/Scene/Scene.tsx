@@ -36,7 +36,7 @@ export default function Scene(): JSX.Element {
   return (
     <SceneWrapper>
       <SceneAttackers>
-        <Attackers wave={0} />
+        <Attackers />
       </SceneAttackers>
 
       <SceneDefenders>

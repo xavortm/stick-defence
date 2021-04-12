@@ -13,6 +13,11 @@ const Waves: WaveInterface[] = [
       meele: 2,
     },
   },
+  {
+    enemies: {
+      meele: 4,
+    },
+  },
 ];
 
 export default Waves;

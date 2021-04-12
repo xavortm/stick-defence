@@ -55,6 +55,11 @@ export const Reducer = (
       return { ...state, money: state.money + action.payload };
     case 'END_GAME':
       return { ...state, isGameCompleted: true, isPlaying: false };
+    case 'UPGRADE_AMMO':
+      return {
+        ...state,
+        ...action.payload,
+      };
     case 'KILL_ENEMEY':
       return {
         ...state,

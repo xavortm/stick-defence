@@ -73,7 +73,7 @@ const UIIngameStatsHeading = styled.h2`
 
 export default function Dashboard(): JSX.Element {
   const { state } = useContext(GameContext);
-  const currentGun = useCurrentGun();
+  // const currentGun = useCurrentGun();
 
   return (
     <UIWrapper>
@@ -81,7 +81,7 @@ export default function Dashboard(): JSX.Element {
         <IngameBar
           label="Bullets"
           counterCurrent={state.gameplay.bullets}
-          counterTotal={currentGun.ammo}
+          counterTotal={state.gameplay.ammo}
           isReloading={state.gameplay.isReloading}
         />
 
