@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from '../../context/store';
-import { useCurrentGun } from '../../hooks/useCurrent';
 
 import IngameBar from './IngameBar';
 
@@ -85,7 +84,11 @@ export default function Dashboard(): JSX.Element {
           isReloading={state.gameplay.isReloading}
         />
 
-        <IngameBar label="Health" counterCurrent={1000} counterTotal={1000} />
+        <IngameBar
+          label="Health"
+          counterCurrent={state.gameplay.baseHealth}
+          counterTotal={state.gameplay.baseHealthMax}
+        />
       </UIIngameBar>
 
       <UIIngameStats>

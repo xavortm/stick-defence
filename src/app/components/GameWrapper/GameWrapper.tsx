@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import { GameProvider, GameContext } from '../../context/store';
+import { GameProvider } from '../../context/store';
 import Scene from '../Scene/Scene';
 import Dashboard from '../Dashboard/Dashboard';
 import Welcome from '../Welcome/Welcome';
-import Completed from '../Completed/Completed';
+import Completed from '../GameEnd/Completed';
+import Lost from '../GameEnd/Lost';
 
 import internalConfig from '../../gameConfig/internalConf';
 
@@ -28,6 +29,7 @@ export default function GameWrapper(): JSX.Element {
 
         {/* When the end game is reached, open the screen below. */}
         <Completed />
+        <Lost />
       </GameProvider>
     </Game>
   );

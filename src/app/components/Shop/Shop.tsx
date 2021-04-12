@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from '../../context/store';
 import Button from '../UI/Button';
+import PurchaseOption from './PurchaseOption';
 
 interface ShopInterface {
   visible?: boolean;
@@ -44,32 +45,6 @@ const Heading = styled.h3`
   margin: 0;
 `;
 
-interface UpgradeTypeInterface {
-  visible?: boolean;
-}
-
-const UpgradeType = styled.div<UpgradeTypeInterface>`
-  display: flex;
-  align-items: center;
-  pointer-events: ${props => (props.visible ? 'all' : 'none')};
-  opacity: ${props => (props.visible ? '1' : '.5')};
-
-  strong {
-    flex: 0 8em;
-  }
-
-  span {
-    text-align: right;
-    flex: 1 0 3em;
-    margin-right: 1em;
-
-    &:last-child {
-      margin-right: 0;
-      margin-left: 1em;
-    }
-  }
-`;
-
 const ShopLayout = styled.div`
   display: flex;
 `;
@@ -90,34 +65,19 @@ export default function Shop(): JSX.Element {
     <ShopWindow visible={!state.gameplay.isPlaying}>
       <ShopInner>
         <Header>
-          <h2>Shop - ${state.gameplay.money} available</h2>
-          <Button solid onClick={handleNextWave}>
-            Start next wave
-          </Button>
+          <h2>Shop: </h2>
+          <div>
+            <span>${state.gameplay.money} to spend </span>
+            <Button solid onClick={handleNextWave}>
+              Start next wave
+            </Button>
+          </div>
         </Header>
 
         <ShopLayout>
           <LayoutPrimary>
             <Heading>Upgrades</Heading>
-
-            <UpgradeType visible={state.gameplay.money > 100}>
-              <strong>Ammo:</strong>
-              <span>{state.gameplay.ammo}</span>
-              <Button
-                onClick={() =>
-                  dispatch({
-                    type: 'UPGRADE_AMMO',
-                    payload: {
-                      ammo: state.gameplay.ammo + 1,
-                      money: state.gameplay.money - 100,
-                    },
-                  })
-                }
-              >
-                +
-              </Button>
-              <span>-$100</span>
-            </UpgradeType>
+            <PurchaseOption cost={100} label="Ammo" type="ammo" />
           </LayoutPrimary>
           <LayoutSecondary></LayoutSecondary>
         </ShopLayout>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import EnemyInterface from '../EnemyInterface';
 import styled, { keyframes } from 'styled-components';
 
@@ -12,6 +12,7 @@ const meeleConfig: EnemyInterface = {
   boxSizeHeight: 2,
   health: 100,
   bounty: 20,
+  dps: 10,
   armor: 0, // This will be used at a later point.
 };
 
@@ -22,7 +23,7 @@ interface EnemyBoxInterface {
   top: number;
 }
 
-const moveHorizintal = x => keyframes`
+const moveHorizintal = (x: number) => keyframes`
     0% {
         transform : translateX(0px) 
     }
@@ -52,9 +53,28 @@ export default function Meele({ moveArea, time, top }): JSX.Element {
   const { dispatch } = useContext(GameContext);
   const [health, setHealth] = useState(meeleConfig.health);
   const [dead, setDead] = useState(false);
+  const shooringInterval = useRef(0);
   // const [armor, setArmor] = useState(meeleConfig.armor);
 
   const currentGun = useCurrentGun();
+
+  useEffect(() => {
+    if (dead) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      // Every 1 second, deal damage to the base.
+      shooringInterval.current = setInterval(() => {
+        dispatch({ type: 'DAMAGE_BASE', payload: 10 });
+      }, 1000);
+    }, time * 1000);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(shooringInterval.current);
+    };
+  }, [time, dead, dispatch]);
 
   const handleClick = () => {
     // The check here will have to account for armor as well.

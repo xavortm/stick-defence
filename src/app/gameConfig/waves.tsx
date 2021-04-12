@@ -10,12 +10,12 @@ interface WaveInterface {
 const Waves: WaveInterface[] = [
   {
     enemies: {
-      meele: 2,
+      meele: 1,
     },
   },
   {
     enemies: {
-      meele: 4,
+      meele: 10,
     },
   },
 ];

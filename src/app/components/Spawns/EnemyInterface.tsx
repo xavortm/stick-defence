@@ -30,4 +30,9 @@ export default interface EnemyInterface {
    * The amount of money the player earns when an enemy is killed.
    */
   bounty: number;
+
+  /**
+   * How much damage is the enemy dealing to the base per second?
+   */
+  dps: number;
 }

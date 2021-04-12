@@ -33,10 +33,13 @@ const initialState: gameStateInterface = {
     isReloading: false,
     isWaveEnded: true,
     isGameCompleted: false,
+    isGameLost: false,
 
     money: 0,
     enemiesKilled: 0,
     enemiesKilledTotal: 0,
+    baseHealth: 1000,
+    baseHealthMax: 1000,
   },
   shop: {
     guns: shopState,

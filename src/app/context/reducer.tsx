@@ -21,9 +21,12 @@ export interface gameplayInterface {
   isWaveEnded: boolean;
   isReloading: boolean;
   isGameCompleted: boolean;
+  isGameLost: boolean;
   money: number;
   enemiesKilled: number;
   enemiesKilledTotal: number;
+  baseHealth: number;
+  baseHealthMax: number;
 }
 
 export interface actionPayloadInterface {
@@ -55,6 +58,13 @@ export const Reducer = (
       return { ...state, money: state.money + action.payload };
     case 'END_GAME':
       return { ...state, isGameCompleted: true, isPlaying: false };
+    case 'LOST_GAME':
+      return { ...state, isGameLost: true, isPlaying: false };
+    case 'DAMAGE_BASE':
+      return {
+        ...state,
+        baseHealth: state.baseHealth -= action.payload,
+      };
     case 'UPGRADE_AMMO':
       return {
         ...state,

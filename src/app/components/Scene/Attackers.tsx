@@ -3,10 +3,7 @@ import styled from 'styled-components';
 
 import Spawner from './Spawner';
 import { GameContext } from '../../context/store';
-import {
-  useCurrentGun,
-  useCurrentWaveTotalEnemies,
-} from '../../hooks/useCurrent';
+import { useCurrentGun } from '../../hooks/useCurrent';
 
 interface AttackingStylesInterface {
   canAttack: boolean;

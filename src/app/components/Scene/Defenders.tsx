@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { GameContext } from '../../context/store';
 
 export default function Defenders(): JSX.Element {
+  const { state, dispatch } = useContext(GameContext);
+
+  useEffect(() => {
+    if (state.gameplay.baseHealth <= 0) {
+      dispatch({ type: 'LOST_GAME' });
+    }
+  }, [dispatch, state.gameplay.baseHealth]);
   return <div></div>;
 }
 
