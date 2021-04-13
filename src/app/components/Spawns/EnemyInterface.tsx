@@ -35,4 +35,9 @@ export default interface EnemyInterface {
    * How much damage is the enemy dealing to the base per second?
    */
   dps: number;
+
+  /**
+   * How fast the enemy moves? *It could have some ranomization fuzzyness
+   */
+  speed: number;
 }

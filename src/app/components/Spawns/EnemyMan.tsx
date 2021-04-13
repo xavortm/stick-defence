@@ -24,7 +24,7 @@ export default function EnemyMan({
 
   switch (type) {
     case 'meele':
-      Enemy = <EnemyManTypes.Meele top={top} time={7} moveArea={moveArea} />;
+      Enemy = <EnemyManTypes.Meele top={top} moveArea={moveArea} />;
       break;
 
     default:
