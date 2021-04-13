@@ -59,11 +59,15 @@ export default function Meele({ moveArea, time, top }): JSX.Element {
   const currentGun = useCurrentGun();
 
   useEffect(() => {
+    let timer;
+
     if (dead) {
+      clearTimeout(timer);
+      clearInterval(shooringInterval.current);
       return;
     }
 
-    const timer = setTimeout(() => {
+    timer = setTimeout(() => {
       // Every 1 second, deal damage to the base.
       shooringInterval.current = setInterval(() => {
         dispatch({ type: 'DAMAGE_BASE', payload: 10 });

@@ -29,18 +29,23 @@ export function useCurrentGun(): GunInterface {
       };
 }
 
-export function useCurrentWaveTotalEnemies() {
+export function useCurrentWaveTotalEnemies(): number {
   const { state } = useContext(GameContext);
   let totalEnemies = 0;
 
   if (typeof Waves[state.gameplay.currentWave] === 'undefined') {
-    return;
+    return 0;
   }
 
   for (const [key, value] of Object.entries(
     Waves[state.gameplay.currentWave].enemies,
   )) {
     if (typeof value === 'number') totalEnemies += value;
+  }
+
+  // Safety check in case something above fails. We only want integers.
+  if (typeof totalEnemies === 'undefined') {
+    return 0;
   }
 
   return totalEnemies;
