@@ -22,7 +22,9 @@ export interface gameplayInterface {
   isReloading: boolean;
   isGameCompleted: boolean;
   isGameLost: boolean;
+
   money: number;
+  attackersMoveArea: number;
   enemiesKilled: number;
   enemiesKilledTotal: number;
   baseHealth: number;

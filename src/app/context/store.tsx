@@ -36,6 +36,7 @@ const initialState: gameStateInterface = {
     isGameLost: false,
 
     money: 0,
+    attackersMoveArea: 543,
     enemiesKilled: 0,
     enemiesKilledTotal: 0,
     baseHealth: 1000,

@@ -14,6 +14,10 @@ const AttackingArea = styled.div<AttackingStylesInterface>`
   width: 100%;
   pointer-events: ${props => (props.canAttack ? 'all' : 'none')};
   position: relative;
+
+  * {
+    pointer-events: ${props => (props.canAttack ? 'all' : 'none')};
+  }
 `;
 
 /**
@@ -76,8 +80,7 @@ export default function Attackers(): JSX.Element {
       canAttack={canAttack.current}
       onClick={handleShotFired}
     >
-      {/* I will have to do the days here as well. */}
-      <Spawner moveArea={543} />
+      <Spawner />
     </AttackingArea>
   );
 }
