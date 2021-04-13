@@ -9,7 +9,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import GameWrapper from './components/GameWrapper/GameWrapper';
+import GameWrapper from './components/GameWrapper';
 
 export function App() {
   return (

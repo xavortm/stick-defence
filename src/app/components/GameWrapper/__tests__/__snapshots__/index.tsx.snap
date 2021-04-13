@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameWrapper /> should render and match the snapshot 1`] = `
+<styled.div>
+  <GameProvider>
+    <Welcome />
+    <Dashboard />
+    <Scene />
+    <Completed />
+    <Lost />
+  </GameProvider>
+</styled.div>
+`;

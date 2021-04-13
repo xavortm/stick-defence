@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> should render and match the snapshot 1`] = `
+<React.Fragment>
+  <Helmet
+    defaultTitle="Stick Defence"
+    defer={true}
+    encodeSpecialCharacters={true}
+    titleTemplate="Stick Defence"
+  >
+    <meta
+      content="My first try in making a game"
+      name="description"
+    />
+  </Helmet>
+  <GameWrapper />
+</React.Fragment>
+`;
