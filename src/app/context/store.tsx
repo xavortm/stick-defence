@@ -41,6 +41,7 @@ const initialState: gameStateInterface = {
     enemiesKilledTotal: 0,
     baseHealth: 1000,
     baseHealthMax: 1000,
+    allWaves: [],
   },
   shop: {
     guns: shopState,

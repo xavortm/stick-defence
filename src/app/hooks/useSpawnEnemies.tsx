@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { GameContext } from '../context/store';
 import { EnemyMan } from '../components/Spawns/';
-import { useCurrentWaveTotalEnemies } from './useCurrent';
+import {
+  useCurrentWaveTotalEnemies,
+  // useCurrentWaveEnemies,
+  // getRandomizedEnemiesSequence,
+} from './useCurrent';
 
 export default function useSpawnEnemies() {
   const { state } = useContext(GameContext);
@@ -10,6 +14,10 @@ export default function useSpawnEnemies() {
   const [enemiesList, setEnemiesList] = useState<JSX.Element[]>([]);
   const enemiesSent = useRef(0);
   const timer = useRef<ReturnType<typeof setInterval>>();
+  // const currentWaveEnemies = useCurrentWaveEnemies();
+
+  // Just testing for the wave output:
+  // console.log(getRandomizedEnemiesSequence(state.gameplay.currentWave + 2));
 
   useEffect(() => {
     if (!state.gameplay.isPlaying) {

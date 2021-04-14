@@ -1,4 +1,5 @@
 import { GunInterface } from '../components/Shop/GunInterface';
+import { WaveInterface } from 'app/gameConfig/waves';
 
 export interface shopStateInterface {
   guns: GunInterface[];
@@ -29,6 +30,7 @@ export interface gameplayInterface {
   enemiesKilledTotal: number;
   baseHealth: number;
   baseHealthMax: number;
+  allWaves: WaveInterface[];
 }
 
 export interface actionPayloadInterface {
@@ -41,6 +43,8 @@ export const Reducer = (
   action: actionPayloadInterface,
 ): gameplayInterface => {
   switch (action.type) {
+    case 'PREPARE_WAVES':
+      return { ...state, allWaves: action.payload };
     case 'START_WAVE':
       return {
         ...state,

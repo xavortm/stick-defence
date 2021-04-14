@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { GameContext } from '../context/store';
 import { GunInterface } from '../components/Shop/GunInterface';
+import { sumObjects, arrayShuffle } from 'app/utils/helpers';
 
-import Waves from '../gameConfig/waves';
+import { WaveEnemiesInterface, WaveInterface } from '../gameConfig/waves';
 
 /**
  * Uses current gun
@@ -29,24 +30,99 @@ export function useCurrentGun(): GunInterface {
       };
 }
 
+/**
+ * Uses current wave total enemies
+ *
+ * @todo Memoize as it's practically returning the same thing all the time.
+ * @returns current wave total enemies
+ */
 export function useCurrentWaveTotalEnemies(): number {
   const { state } = useContext(GameContext);
-  let totalEnemies = 0;
-
-  if (typeof Waves[state.gameplay.currentWave] === 'undefined') {
-    return 0;
-  }
-
-  for (const [key, value] of Object.entries(
-    Waves[state.gameplay.currentWave].enemies,
-  )) {
-    if (typeof value === 'number') totalEnemies += value;
-  }
+  const enemiesCount = getEnemiesCountAllWaves(state.gameplay.allWaves);
 
   // Safety check in case something above fails. We only want integers.
-  if (typeof totalEnemies === 'undefined') {
+  if (
+    typeof enemiesCount[state.gameplay.currentWave] === 'undefined' ||
+    typeof state.gameplay.allWaves[state.gameplay.currentWave] === 'undefined'
+  ) {
     return 0;
   }
 
-  return totalEnemies;
+  return enemiesCount[state.gameplay.currentWave];
+}
+
+/**
+ * Uses current wave enemies
+ *
+ * @returns an Object with the amount of enemies to send per type
+ */
+export function useCurrentWaveEnemies() {
+  const { state } = useContext(GameContext);
+  return getEnemiesToSendPerType(state.gameplay.allWaves)[
+    state.gameplay.currentWave
+  ];
+}
+
+// @todo stuff below should be part of the Utils later and only work with params.
+// ------------------------------------------------------------------------------
+
+/**
+ * Maps enemies count and returns an array with the count of enemies for all waves.
+ * @returns enemies count array with number for each wave.
+ */
+function getEnemiesCountAllWaves(allWaves: WaveInterface[]): number[] {
+  let enemiesInWaves: number[] = [];
+  let totalEnemiesThisWave: number = 0;
+
+  allWaves.forEach(wave => {
+    for (const [key, value] of Object.entries(wave.enemies)) {
+      if (typeof value === 'number') totalEnemiesThisWave += value;
+    }
+
+    enemiesInWaves.push(totalEnemiesThisWave);
+  });
+
+  return enemiesInWaves;
+}
+
+/**
+ * Randomizes enemies sequence.
+ *
+ * Has to be run only once though as every time it would return random array,
+ * which is terrible for performance.
+ * @param waveIndex
+ * @returns enemies sequence
+ */
+export function randomizeEnemiesSequence(
+  allWaves: WaveInterface[],
+  waveIndex: number,
+): string[] {
+  let enemiesThisWave = getEnemiesToSendPerType(allWaves)[waveIndex];
+  let arrayOfEnemies: string[] = [];
+
+  for (const [key, value] of Object.entries(enemiesThisWave)) {
+    arrayOfEnemies = arrayOfEnemies.concat(Array(value).fill(key));
+  }
+
+  return arrayShuffle(arrayOfEnemies);
+}
+
+/**
+ * Maps enemy types count
+ *
+ * @returns array of all enemies per type for each wave
+ */
+function getEnemiesToSendPerType(allWaves) {
+  let enemiesInWaves: WaveEnemiesInterface[] = [];
+
+  allWaves.forEach((wave, index) => {
+    if (index === 0) {
+      enemiesInWaves.push(wave.enemies);
+      return;
+    }
+
+    enemiesInWaves.push(sumObjects(wave.enemies, allWaves[index - 1].enemies));
+  });
+
+  return enemiesInWaves;
 }

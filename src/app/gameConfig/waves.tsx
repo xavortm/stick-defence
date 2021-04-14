@@ -1,13 +1,15 @@
-interface WaveInterface {
-  enemies: {
-    meele?: number;
-    rifle?: number;
-  };
+export interface WaveEnemiesInterface {
+  meele?: number;
+  rifle?: number;
+}
+
+export interface WaveInterface {
+  enemies: WaveEnemiesInterface;
 }
 
 // Waves work on a change: first wave sets the initial values
 // and all later waves change the previous one.
-const Waves: WaveInterface[] = [
+export const wavesSetup: WaveInterface[] = [
   {
     enemies: {
       meele: 1,
@@ -15,9 +17,8 @@ const Waves: WaveInterface[] = [
   },
   {
     enemies: {
-      meele: 10,
+      meele: 1,
+      rifle: 1,
     },
   },
 ];
-
-export default Waves;
