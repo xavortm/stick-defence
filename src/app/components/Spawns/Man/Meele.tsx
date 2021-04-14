@@ -12,7 +12,7 @@ const enemyConfig: EnemyInterface = {
   health: 100,
   bounty: 20,
   dps: 10,
-  speed: 15,
+  speed: 7,
   armor: 0, // This will be used at a later point.
 };
 

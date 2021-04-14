@@ -16,13 +16,11 @@ export default function useSpawnEnemies() {
       return;
     }
 
-    if (currentWaveTotalEnemies <= enemiesSent.current) {
-      clearInterval(timer.current);
-      return;
-    }
-
     timer.current = setInterval(() => {
-      enemiesSent.current++;
+      if (currentWaveTotalEnemies <= enemiesSent.current) {
+        clearInterval(timer.current);
+        return;
+      }
 
       setEnemiesList(old => [
         ...old,
@@ -33,6 +31,8 @@ export default function useSpawnEnemies() {
           moveArea={state.gameplay.attackersMoveArea}
         />,
       ]);
+
+      enemiesSent.current++;
 
       // As currentWave increases, the value below (15) must decrease.
     }, Math.floor(Math.random() * 200) * 15);
