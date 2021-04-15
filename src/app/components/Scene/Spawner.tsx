@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { GameContext } from '../../context/store';
-import { useCurrentWaveTotalEnemies } from '../../hooks/useCurrent';
-import useSpawnEnemies from '../../hooks/useSpawnEnemies';
+import { GameContext } from 'app/context/store';
+import { useCurrentWaveTotalEnemies } from 'app/hooks/useCurrent';
+import useSpawnEnemies from 'app/hooks/useSpawnEnemies';
 // import Waves from '../../gameConfig/waves';
 
 // The Spawner mostly is side effect stuff that manages the game state.

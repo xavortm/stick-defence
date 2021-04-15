@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { GameContext } from '../../context/store';
+import { GameContext } from 'app/context/store';
+import { wavesSetup } from 'app/gameConfig/waves';
 
 interface WelcomeWrapperInterface {
   visible: boolean;
@@ -18,6 +19,7 @@ const WelcomeWrapper = styled.div<WelcomeWrapperInterface>`
   display: ${props => (props.visible ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;
+  top: 0;
 
   a {
     color: yellow;
