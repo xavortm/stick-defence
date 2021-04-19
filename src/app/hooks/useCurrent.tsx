@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { GameContext } from '../context/store';
-import { GunInterface } from '../components/Shop/GunInterface';
+import { GameContext } from 'app/context/store';
+import { GunInterface } from 'app/components/Shop/GunInterface';
+import { EnemyTypes } from 'app/components/Spawns/EnemyInterface';
 import { sumObjects, arrayShuffle } from 'app/utils/helpers';
-
-import { WaveEnemiesInterface, WaveInterface } from '../gameConfig/waves';
+import { WaveEnemiesInterface, WaveInterface } from 'app/gameConfig/waves';
 
 /**
  * Uses current gun
@@ -58,9 +58,19 @@ export function useCurrentWaveTotalEnemies(): number {
  */
 export function useCurrentWaveEnemies() {
   const { state } = useContext(GameContext);
+
   return getEnemiesToSendPerType(state.gameplay.allWaves)[
     state.gameplay.currentWave
   ];
+}
+
+export function useRandomizedCurrentWaveEnemies() {
+  const { state } = useContext(GameContext);
+
+  return randomizeEnemiesSequence(
+    state.gameplay.allWaves,
+    state.gameplay.currentWave,
+  );
 }
 
 // @todo stuff below should be part of the Utils later and only work with params.
@@ -96,7 +106,15 @@ function getEnemiesCountAllWaves(allWaves: WaveInterface[]): number[] {
 export function randomizeEnemiesSequence(
   allWaves: WaveInterface[],
   waveIndex: number,
-): string[] {
+): EnemyTypes {
+  if (
+    typeof allWaves === 'undefined' ||
+    typeof waveIndex === 'undefined' ||
+    waveIndex === -1
+  ) {
+    return [];
+  }
+
   let enemiesThisWave = getEnemiesToSendPerType(allWaves)[waveIndex];
   let arrayOfEnemies: string[] = [];
 

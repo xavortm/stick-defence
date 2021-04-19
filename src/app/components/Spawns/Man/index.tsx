@@ -1,4 +1,5 @@
 import Meele from './Meele';
+import Rifle from './Rifle';
 import styled, { keyframes } from 'styled-components';
 import EnemyInterface from '../EnemyInterface';
 
@@ -7,6 +8,7 @@ interface EnemyBoxInterface {
   moveArea: number;
   top: number;
   enemyConfig: EnemyInterface;
+  type: string;
 }
 
 const moveHorizintal = (x: number) => keyframes`
@@ -24,8 +26,6 @@ export const EnemyBox = styled.span<EnemyBoxInterface>`
   width: ${props => props.enemyConfig.boxSizeWidth}em;
   height: ${props => props.enemyConfig.boxSizeHeight}em;
 
-  // Later to be updated with a sprite.
-  background: ${props => (props.isDead ? 'red' : 'blue')};
   pointer-events: ${props => (props.isDead ? 'none' : 'all')};
   top: ${props => props.top}px;
 
@@ -35,4 +35,4 @@ export const EnemyBox = styled.span<EnemyBoxInterface>`
   animation-play-state: ${props => (props.isDead ? 'paused' : 'playing')};
 `;
 
-export const EnemyManTypes = { Meele };
+export const EnemyManTypes = { Meele, Rifle };

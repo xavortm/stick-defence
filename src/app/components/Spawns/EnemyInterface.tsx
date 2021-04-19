@@ -1,3 +1,6 @@
+export type EnemyTypesString = 'rifle' | 'meele';
+export type EnemyTypes = Array<'rifle' | 'meele'>;
+
 export default interface EnemyInterface {
   /**
    * Each enemy needs a type and the type will define which enemy to load from the components.

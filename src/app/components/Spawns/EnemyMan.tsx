@@ -4,7 +4,7 @@ import { EnemyManTypes } from './Man';
 
 type EnemyProps = {
   /** What type of an enemy should be loaded? */
-  type: 'meele' | 'rifle';
+  type: string;
   moveArea: number;
   top: number;
 };
@@ -25,6 +25,10 @@ export default function EnemyMan({
   switch (type) {
     case 'meele':
       Enemy = <EnemyManTypes.Meele top={top} moveArea={moveArea} />;
+      break;
+
+    case 'rifle':
+      Enemy = <EnemyManTypes.Rifle top={top} moveArea={moveArea} />;
       break;
 
     default:

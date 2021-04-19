@@ -6,17 +6,17 @@ import useEnemyObject from 'app/hooks/useEnemyObject';
 
 // At later point this will could be changed with the different day settings.
 const enemyConfig: EnemyInterface = {
-  type: 'meele',
+  type: 'rifle',
   boxSizeWidth: 2,
   boxSizeHeight: 2,
-  health: 100,
-  bounty: 20,
-  dps: 10,
-  speed: 7,
+  health: 150,
+  bounty: 50,
+  dps: 20,
+  speed: 12,
   armor: 0, // This will be used at a later point.
 };
 
-export default function Meele({ moveArea, top }): JSX.Element {
+export default function Rifle({ moveArea, top }): JSX.Element {
   const [handleClick, isDead] = useEnemyObject(enemyConfig);
 
   return (
@@ -26,7 +26,7 @@ export default function Meele({ moveArea, top }): JSX.Element {
       top={top}
       isDead={isDead}
       onClick={handleClick}
-      type="meele"
+      type="rifle"
     />
   );
 }

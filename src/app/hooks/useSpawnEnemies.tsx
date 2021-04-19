@@ -3,21 +3,17 @@ import { GameContext } from '../context/store';
 import { EnemyMan } from '../components/Spawns/';
 import {
   useCurrentWaveTotalEnemies,
-  // useCurrentWaveEnemies,
-  // getRandomizedEnemiesSequence,
+  useRandomizedCurrentWaveEnemies,
 } from './useCurrent';
 
 export default function useSpawnEnemies() {
   const { state } = useContext(GameContext);
   const currentWaveTotalEnemies: number = useCurrentWaveTotalEnemies();
+  const currentWaveEnemies = useRandomizedCurrentWaveEnemies();
 
   const [enemiesList, setEnemiesList] = useState<JSX.Element[]>([]);
   const enemiesSent = useRef(0);
   const timer = useRef<ReturnType<typeof setInterval>>();
-  // const currentWaveEnemies = useCurrentWaveEnemies();
-
-  // Just testing for the wave output:
-  // console.log(getRandomizedEnemiesSequence(state.gameplay.currentWave + 2));
 
   useEffect(() => {
     if (!state.gameplay.isPlaying) {
@@ -35,7 +31,7 @@ export default function useSpawnEnemies() {
         <EnemyMan
           key={enemiesSent.current}
           top={Math.floor(Math.random() * 200)}
-          type="meele" // @TODO: Change to pull all current wave enemies
+          type={currentWaveEnemies[enemiesSent.current]}
           moveArea={state.gameplay.attackersMoveArea}
         />,
       ]);
@@ -53,6 +49,7 @@ export default function useSpawnEnemies() {
     state.gameplay.attackersMoveArea,
     enemiesSent,
     currentWaveTotalEnemies,
+    currentWaveEnemies,
   ]);
 
   return enemiesList;
