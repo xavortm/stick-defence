@@ -25,9 +25,6 @@ const SceneAttackers = styled.div`
 
 const SceneDefenders = styled.div`
   flex: 0 0 16em;
-
-  // A debugging value.
-  border-left: 1px solid #ddd;
 `;
 
 export default function Scene(): JSX.Element {

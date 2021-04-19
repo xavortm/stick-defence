@@ -39,6 +39,10 @@ const Header = styled.header`
   h2 {
     margin: 0;
   }
+
+  button {
+    margin-left: 0.5em;
+  }
 `;
 
 const Heading = styled.h3`

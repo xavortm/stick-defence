@@ -1,6 +1,6 @@
 import React from 'react';
 import EnemyInterface from '../EnemyInterface';
-
+import { css } from 'styled-components';
 import { EnemyBox } from './';
 import useEnemyObject from 'app/hooks/useEnemyObject';
 
@@ -16,6 +16,10 @@ const enemyConfig: EnemyInterface = {
   armor: 0, // This will be used at a later point.
 };
 
+const MeeleStyles = css`
+  background: orange;
+`;
+
 export default function Meele({ moveArea, top }): JSX.Element {
   const [handleClick, isDead] = useEnemyObject(enemyConfig);
 
@@ -27,6 +31,7 @@ export default function Meele({ moveArea, top }): JSX.Element {
       isDead={isDead}
       onClick={handleClick}
       type="meele"
+      styles={MeeleStyles}
     />
   );
 }

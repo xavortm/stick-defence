@@ -9,6 +9,7 @@ interface ButtonInterface {
   solid?: boolean;
   onClick: any;
   children: JSX.Element | string;
+  className?: any;
 }
 
 const StyledButton = styled.button<ButtonStyledInterface>`
@@ -18,11 +19,17 @@ const StyledButton = styled.button<ButtonStyledInterface>`
   padding: 0.75em 1.25em;
   display: inline-block;
   cursor: pointer;
+  font-size: 1em;
 `;
 
-export default function Button({ children, onClick, solid }: ButtonInterface) {
+export default function Button({
+  children,
+  onClick,
+  solid,
+  className,
+}: ButtonInterface) {
   return (
-    <StyledButton solid={solid} onClick={onClick}>
+    <StyledButton className={className} solid={solid} onClick={onClick}>
       {children}
     </StyledButton>
   );

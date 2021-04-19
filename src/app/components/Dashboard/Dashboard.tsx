@@ -25,7 +25,7 @@ const UIIngameBar = styled.div`
   padding: 1em;
 
   // Theming:
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
   background: white;
 `;
 
@@ -36,7 +36,7 @@ const UIIngameStats = styled.div`
   padding: 1em;
 
   // Theming:
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   background: white;
 
   p {
@@ -54,7 +54,7 @@ const UIIngameGuns = styled.div`
   padding: 0 0.5em;
 
   // Theming:
-  border-top: 1px solid #ddd;
+  /* border-top: 1px solid #ddd; */
   background: white;
 `;
 

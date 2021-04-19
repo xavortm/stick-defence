@@ -9,6 +9,7 @@ interface EnemyBoxInterface {
   top: number;
   enemyConfig: EnemyInterface;
   type: string;
+  styles?: any;
 }
 
 const moveHorizintal = (x: number) => keyframes`
@@ -33,6 +34,9 @@ export const EnemyBox = styled.span<EnemyBoxInterface>`
     ${props => props.enemyConfig.speed}s linear;
   animation-fill-mode: both;
   animation-play-state: ${props => (props.isDead ? 'paused' : 'playing')};
+
+  /* And here we add any overwrites for the specific type of enemy */
+  ${props => props.styles && props.styles}
 `;
 
 export const EnemyManTypes = { Meele, Rifle };
