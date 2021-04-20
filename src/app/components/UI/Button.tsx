@@ -12,7 +12,7 @@ interface ButtonInterface {
   className?: any;
 }
 
-const StyledButton = styled.button<ButtonStyledInterface>`
+export const StyledButton = styled.button<ButtonStyledInterface>`
   border: 1px solid black;
   background: ${props => (props.solid ? 'black' : 'white')};
   color: ${props => (props.solid ? 'white' : 'black')};

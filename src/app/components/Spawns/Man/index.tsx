@@ -26,6 +26,7 @@ export const EnemyBox = styled.span<EnemyBoxInterface>`
   position: absolute;
   width: ${props => props.enemyConfig.boxSizeWidth}em;
   height: ${props => props.enemyConfig.boxSizeHeight}em;
+  opacity: ${props => (props.isDead ? '.3' : '1')};
 
   pointer-events: ${props => (props.isDead ? 'none' : 'all')};
   top: ${props => props.top}px;
@@ -37,6 +38,10 @@ export const EnemyBox = styled.span<EnemyBoxInterface>`
 
   /* And here we add any overwrites for the specific type of enemy */
   ${props => props.styles && props.styles}
+
+  &:active {
+    opacity: 0.5;
+  }
 `;
 
 export const EnemyManTypes = { Meele, Rifle };

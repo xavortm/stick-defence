@@ -17,7 +17,9 @@ const enemyConfig: EnemyInterface = {
 };
 
 const MeeleStyles = css`
-  background: orange;
+  background: no-repeat center center;
+  background-size: 100% 100%;
+  background-image: url('artwork-default/enemyMeele/walking.gif');
 `;
 
 export default function Meele({ moveArea, top }): JSX.Element {

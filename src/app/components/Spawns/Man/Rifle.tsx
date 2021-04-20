@@ -17,7 +17,9 @@ const enemyConfig: EnemyInterface = {
 };
 
 const RifleStyles = css`
-  background: purple;
+  background: no-repeat center center;
+  background-size: 100% 100%;
+  background-image: url('artwork-default/enemyRifle/walking.gif');
 `;
 
 export default function Rifle({ moveArea, top }): JSX.Element {
@@ -26,7 +28,7 @@ export default function Rifle({ moveArea, top }): JSX.Element {
   return (
     <EnemyBox
       enemyConfig={enemyConfig}
-      moveArea={moveArea}
+      moveArea={(moveArea * 2) / 3}
       top={top}
       isDead={isDead}
       onClick={handleClick}

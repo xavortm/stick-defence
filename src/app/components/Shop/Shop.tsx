@@ -58,6 +58,12 @@ const LayoutPrimary = styled.div`
 `;
 const LayoutSecondary = styled.div``;
 
+const ShopGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+`;
+
 export default function Shop(): JSX.Element {
   const { state, dispatch } = useContext(GameContext);
 
@@ -81,7 +87,19 @@ export default function Shop(): JSX.Element {
         <ShopLayout>
           <LayoutPrimary>
             <Heading>Upgrades</Heading>
-            <PurchaseOption cost={100} label="Ammo" type="ammo" />
+            <ShopGrid>
+              <PurchaseOption cost={100} label="Ammo" type="ammo" />
+              <PurchaseOption
+                cost={1000}
+                label="Restore base"
+                type="baseHealth"
+              />
+              <PurchaseOption
+                cost={state.gameplay.baseHealthMax * 3}
+                label="Upgrade base"
+                type="baseHealthMax"
+              />
+            </ShopGrid>
           </LayoutPrimary>
           <LayoutSecondary></LayoutSecondary>
         </ShopLayout>
