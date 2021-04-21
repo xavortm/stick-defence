@@ -9,14 +9,13 @@ export default function Spawner() {
   const { state, dispatch } = useContext(GameContext);
   const currentWaveTotalEnemies = useCurrentWaveTotalEnemies();
 
-  const spawnedEnemies = useSpawnEnemies();
-  const [enemiesList, setEnemiesList] = useState<JSX.Element[]>([]);
+  // Just wrap some react code
+  useSpawnEnemies();
 
   // With this we know that the end has waved and the player cleared it.
   useEffect(() => {
     if (currentWaveTotalEnemies === state.gameplay.enemiesKilled) {
       dispatch({ type: 'END_WAVE' });
-      setEnemiesList([]);
 
       // Once the wave ends, check if the we've reached the final level.
       if (state.gameplay.allWaves.length === state.gameplay.currentWave + 1) {
@@ -31,9 +30,5 @@ export default function Spawner() {
     state.gameplay.allWaves.length,
   ]);
 
-  useEffect(() => {
-    setEnemiesList(spawnedEnemies);
-  }, [spawnedEnemies]);
-
-  return <>{enemiesList}</>;
+  return <>{state.gameplay.enemiesList}</>;
 }

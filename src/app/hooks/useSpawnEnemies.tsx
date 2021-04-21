@@ -7,11 +7,9 @@ import {
 } from './useCurrent';
 
 export default function useSpawnEnemies() {
-  const { state } = useContext(GameContext);
+  const { state, dispatch } = useContext(GameContext);
   const currentWaveTotalEnemies: number = useCurrentWaveTotalEnemies();
   const currentWaveEnemies = useRandomizedCurrentWaveEnemies();
-
-  const [enemiesList, setEnemiesList] = useState<JSX.Element[]>([]);
   const enemiesSent = useRef(0);
   const timer = useRef<ReturnType<typeof setInterval>>();
 
@@ -23,18 +21,21 @@ export default function useSpawnEnemies() {
     timer.current = setInterval(() => {
       if (currentWaveTotalEnemies <= enemiesSent.current) {
         clearInterval(timer.current);
+        enemiesSent.current = 0;
         return;
       }
 
-      setEnemiesList(old => [
-        ...old,
-        <EnemyMan
-          key={enemiesSent.current}
-          top={Math.floor(Math.random() * 200)}
-          type={currentWaveEnemies[enemiesSent.current]}
-          moveArea={state.gameplay.attackersMoveArea}
-        />,
-      ]);
+      dispatch({
+        type: 'SPAWN_ENEMEY',
+        payload: (
+          <EnemyMan
+            key={enemiesSent.current}
+            top={Math.floor(Math.random() * 200)}
+            type={currentWaveEnemies[enemiesSent.current]}
+            moveArea={state.gameplay.attackersMoveArea}
+          />
+        ),
+      });
 
       enemiesSent.current++;
 
@@ -50,7 +51,6 @@ export default function useSpawnEnemies() {
     enemiesSent,
     currentWaveTotalEnemies,
     currentWaveEnemies,
+    dispatch,
   ]);
-
-  return enemiesList;
 }

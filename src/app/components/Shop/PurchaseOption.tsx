@@ -12,7 +12,7 @@ interface PurchaseButtonInterface {
 }
 
 const Cost = styled.div`
-  color: yellow;
+  color: purple;
 `;
 
 const PurchaseButton = styled.button<PurchaseButtonInterface>`
@@ -92,7 +92,6 @@ export default function PurchaseOption({ cost, label, type }) {
       <Tooltip>
         <strong>{label}:</strong>
         <span>You have: {state.gameplay[type]}</span>
-        <Cost>Costs: ${cost}</Cost>
       </Tooltip>
       <PurchaseButton
         asset={type}
@@ -108,6 +107,7 @@ export default function PurchaseOption({ cost, label, type }) {
       >
         Buy
       </PurchaseButton>
+      <Cost>${cost}</Cost>
     </UpgradeType>
   );
 }

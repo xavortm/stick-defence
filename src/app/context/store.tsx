@@ -28,6 +28,7 @@ const initialState: gameStateInterface = {
     // To be removed and use from Shop
     bullets: 7,
     ammo: 7,
+    money: 0,
 
     isPlaying: false,
     isReloading: false,
@@ -35,13 +36,14 @@ const initialState: gameStateInterface = {
     isGameCompleted: false,
     isGameLost: false,
 
-    money: 0,
+    enemiesList: [],
     attackersMoveArea: 543,
     enemiesKilled: 0,
     enemiesKilledTotal: 0,
+    allWaves: [],
+
     baseHealth: 1000,
     baseHealthMax: 1000,
-    allWaves: [],
   },
   shop: {
     guns: shopState,

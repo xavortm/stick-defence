@@ -17,6 +17,7 @@ export interface gameplayInterface {
   currentGun: string;
   ammo: number;
   bullets: number;
+  money: number;
 
   isPlaying: boolean;
   isWaveEnded: boolean;
@@ -24,13 +25,14 @@ export interface gameplayInterface {
   isGameCompleted: boolean;
   isGameLost: boolean;
 
-  money: number;
   attackersMoveArea: number;
   enemiesKilled: number;
   enemiesKilledTotal: number;
+  allWaves: WaveInterface[];
+  enemiesList: JSX.Element[];
+
   baseHealth: number;
   baseHealthMax: number;
-  allWaves: WaveInterface[];
 }
 
 export interface actionPayloadInterface {
@@ -53,7 +55,7 @@ export const Reducer = (
         isPlaying: true,
       };
     case 'END_WAVE':
-      return { ...state, isPlaying: false };
+      return { ...state, isPlaying: false, enemiesList: [] };
     case 'RELOADING':
       return { ...state, isReloading: true };
     case 'RELOADED':
@@ -76,12 +78,23 @@ export const Reducer = (
         ...state,
         ...action.payload,
       };
+    case 'REMOVE_ENEMEY':
+      return {
+        ...state,
+        enemiesList: state.enemiesList.slice(state.enemiesList.length - 1, 1),
+      };
+    case 'SPAWN_ENEMEY':
+      return {
+        ...state,
+        enemiesList: [...state.enemiesList, action.payload],
+      };
     case 'KILL_ENEMEY':
       return {
         ...state,
         enemiesKilled: state.enemiesKilled + 1,
         enemiesKilledTotal: state.enemiesKilledTotal + 1,
       };
+
     default:
       return state;
   }
