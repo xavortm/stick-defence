@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from '../../context/store';
-import Button, { StyledButton } from '../UI/Button';
+import { StyledButton } from '../UI/Button';
 
 interface UpgradeTypeInterface {
   visible?: boolean;
@@ -71,7 +71,7 @@ const UpgradeType = styled.div<UpgradeTypeInterface>`
 
 export default function PurchaseOption({ cost, label, type }) {
   const { state, dispatch } = useContext(GameContext);
-  let value;
+  let value: number;
 
   switch (type) {
     case 'ammo':

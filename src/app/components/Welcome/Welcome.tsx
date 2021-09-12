@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from 'app/context/store';
-import { wavesSetup } from 'app/gameConfig/waves';
 
 interface WelcomeWrapperInterface {
   visible: boolean;

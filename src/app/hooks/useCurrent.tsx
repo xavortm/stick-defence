@@ -85,6 +85,7 @@ function getEnemiesCountAllWaves(allWaves: WaveInterface[]): number[] {
   let totalEnemiesThisWave: number = 0;
 
   allWaves.forEach(wave => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for (const [key, value] of Object.entries(wave.enemies)) {
       if (typeof value === 'number') totalEnemiesThisWave += value;
     }

@@ -1,11 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { wavesSetup } from 'app/gameConfig/waves';
 import { GameContext } from '../../context/store';
 const PrepareGame = () => {
-  const { state, dispatch } = useContext(GameContext);
+  const { dispatch } = useContext(GameContext);
 
   useEffect(() => {
-    const randomizedArray = [];
+    // const randomizedArray = [];
 
     // Prepare the wave for this game run (randomize stuff);
     // @todo - for some reason this doesn't dispatch to the reduced ........
